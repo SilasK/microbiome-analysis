@@ -1,0 +1,31 @@
+# This file should contain everything to configure the workflow on a global scale.
+# In case of sample based data, it should be complemented by a samples.tsv file that contains
+# one row per sample. It can be parsed easily via pandas.
+
+threads: 3
+
+metadata: /Users/silas/PhD/06_Projects/Warm_claire_microbiota/01_mapping_files/mapping_file_WT.tsv
+grouping_variable: Group
+
+Comparisons:
+  TempOVA-t:
+    - 'OVA_t-RT'
+    -  'OVA_t-H'
+  TempSH:
+    - 'SH-R'
+    - 'SH-H'
+  TempOVA:
+    - 'OVA-R'
+    - 'OVA-H'
+  Ova:
+    - 'SH-R'
+    - 'OVA-R'
+#  OvaH:
+#    - 'SH-H'
+#    - 'OVA-H'
+
+
+fdr_correlations: 0.001
+
+data: /Users/silas/Desktop/WarmMicrobiota/Analysis/output/seqtab.tsv
+min_count: 1 # min mean
