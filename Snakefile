@@ -1,9 +1,7 @@
 import pandas as pd
 import os
 
-import sys
-sys.path.append(os.path.join(os.path.dirname(workflow.snakefile),'scripts'))
-from common import effect_plot as EP
+
 # The main entry point of your workflow.
 # After configuring, running snakemake -n in a clone of this repository should successfully execute a dry-run of the workflow.
 
@@ -17,9 +15,9 @@ rule all:
         'metadata.tsv',
         expand("Comparisons/{comparison}/{file}",
                comparison=Comparisons,
-               file=['stats_aldex.tsv','aldex_plot.pdf','stats_relab.tsv'] ),
+               file=['stats_aldex.tsv','aldex_plot.pdf'] ), #'stats_relab.tsv'
         "Comparisons/cobined_stats_aldex.tsv",
-        "Comparisons/cobined_stats_relab.tsv"
+        #"Comparisons/cobined_stats_relab.tsv"
         #"Correlations/rho.tsv"
 
 
@@ -69,6 +67,11 @@ rule aldex_plot:
         import matplotlib
         import matplotlib.pylab as plt
         matplotlib.rcParams['pdf.fonttype']=42
+
+        import sys
+        sys.path.append(os.path.join(os.path.dirname(workflow.snakefile),'scripts'))
+        from common import effect_plot as EP
+
 
         S= pd.read_table(input[0])
         EP.aldex_plot(S)
